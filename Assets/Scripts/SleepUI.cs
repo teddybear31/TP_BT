@@ -1,21 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.UI;
 
-public class Cat : MonoBehaviour
+public class SleepUI : MonoBehaviour
 {
-    [SerializeField] private NavMeshAgent _agent;
-    [SerializeField] private Transform _testPoint;
+    //[SerializeField] private Cat cat;
+    [SerializeField] private Image image;
+
     // Start is called before the first frame update
     void Start()
     {
-        _agent.destination = _testPoint.position;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //image.fillAmount = cat.Sleep / cat.MaxSleep;
     }
 }

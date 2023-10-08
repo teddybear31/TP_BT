@@ -5,21 +5,19 @@ using TheKiwiCoder;
 
 public class MoveToPosition : ActionNode
 {
-    public float speed = 5;
     public float stoppingDistance = 0.1f;
     public bool updateRotation = true;
-    public float acceleration = 40.0f;
-    public float tolerance = 1.0f;
+    public float tolerance = 0.01f;
 
     protected override void OnStart() {
         context.agent.stoppingDistance = stoppingDistance;
-        context.agent.speed = speed;
         context.agent.destination = blackboard.moveToPosition;
         context.agent.updateRotation = updateRotation;
-        context.agent.acceleration = acceleration;
+        context.animator.SetBool("Walk",true);
     }
 
     protected override void OnStop() {
+        context.animator.SetBool("Walk", false);
     }
 
     protected override State OnUpdate() {
@@ -28,6 +26,7 @@ public class MoveToPosition : ActionNode
         }
 
         if (context.agent.remainingDistance < tolerance) {
+            context.transform.position = new Vector3(blackboard.moveToPosition.x, context.transform.position.y, blackboard.moveToPosition.z);
             return State.Success;
         }
 

@@ -1,24 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
+using TheKiwiCoder;
 using UnityEngine;
 
-namespace TheKiwiCoder {
-    public class Wait : ActionNode {
-        public float duration = 1;
-        float startTime;
+public class Wait : ActionNode {
+    public float duration = 3;
+    float startTime;
 
-        protected override void OnStart() {
-            startTime = Time.time;
-        }
+    protected override void OnStart() {
+        startTime = Time.time;
+        context.animator.SetBool("Wait",true);
+    }
 
-        protected override void OnStop() {
-        }
+    protected override void OnStop() {
+        context.animator.SetBool("Wait", false);
+    }
 
-        protected override State OnUpdate() {
-            if (Time.time - startTime > duration) {
-                return State.Success;
-            }
-            return State.Running;
+    protected override State OnUpdate() {
+        if (Time.time - startTime > duration) {
+            return State.Success;
         }
+        return State.Running;
     }
 }
+
